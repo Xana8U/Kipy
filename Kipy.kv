@@ -1,0 +1,85 @@
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+ScreenManagement:
+    transition: FadeTransition()
+    LoginScreen:
+    Interface:
+
+<LoginScreen>
+    name: "login"
+    Widget:
+        Button:
+            id: loginB
+            size: 90, 70
+            pos: 220, 20
+            text: "Login"
+            on_release:
+                root.logininfo()
+                app.root.current ="interface"
+
+
+        TextInput:
+            id: username
+            size: 200, 30
+            pos: 10, 60
+            hint_text: "Username"
+            multiline: False
+
+        TextInput:
+            id: ipAddr
+            size: 200, 30
+            pos: 10, 20
+            hint_text: "Server Address"
+            multiline: False
+            on_text_validate:
+                root.logininfo()
+                app.root.current ="interface"
+
+        Image:
+            source: "Kipy.png"
+            size: 50, 50
+            pos: 10, 100
+
+        Label:
+            text: "Kipy"
+            font_size: 30
+            pos: 60, 85
+
+        Label:
+            text: "Chat for all furry birds and slithering snakes"
+            font_size: 11
+            pos: 140, 60
+
+
+<Interface>
+    name: "interface"
+    Widget:
+        TextInput:
+            id: messages
+            size: 450, 260
+            pos: 10, 120
+            multiline: False
+            hint_text: "Message History(Send one message to join the chat!)"
+            font_size: 12
+            readonly: True
+            padding: 6,6,0,-24
+
+        TextInput:
+            id: msgInput
+            size: 450, 70
+            pos: 10, 32
+            multiline: False
+            on_text_validate:
+                root.sendnreceive(app.root.username, app.root.ipaddr, "msg")
+            hint_text: "Message"
+
+        Button:
+            pos: 480, 30
+            size: 95, 70
+            text: "Send"
+            on_release:
+                root.sendnreceive(app.root.username, app.root.ipaddr, "msg")
+
+        Image:
+            source: "Kipy.png"
+            pos: 480, 280
