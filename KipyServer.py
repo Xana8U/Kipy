@@ -5,7 +5,7 @@ import time
 conn = sqlite3.connect("Messages.db")
 c = conn.cursor()
 
-
+'''Handles connections and returns a data to clients'''
 class TCPhandler(socketserver.BaseRequestHandler):
     def handle(self):
         self.data = self.request.recv(1024).strip()
